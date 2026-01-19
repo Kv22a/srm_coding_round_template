@@ -1,10 +1,11 @@
+
 """
 Q3: Event Overload Detector
 
 You are analyzing activity logs from a system where users trigger events over time.
 
 Each event contains:
-- a `user_id` (integer)
+- a `user_idevents` (integer)
 - a `timestamp` (in seconds)
 
 A user is considered **overloaded** if they generate **too many events in a
@@ -66,12 +67,32 @@ def find_overloaded_users(events):
         >>> find_overloaded_users([(1, 1), (1, 20), (1, 40)])
         set()
     """
-    # TODO: Implement your solution here
-    pass
+    from collections import defaultdict
+
+    userevents = defaultdict(list)
+
+    
+    for userid, timestamp in events:
+        userevents[userid].append(timestamp)
+
+    overloadedusers = set()
+
+    
+    for userid, timestamps in userevents.items():
+        timestamps.sort()
+        n = len(timestamps)
+
+        
+        for i in range(n - 2):
+            if timestamps[i + 2] - timestamps[i] < 10:
+                overloadedusers.add(userid)
+                break
+
+    return overloadedusers
 
 
 if __name__ == "__main__":
-    # Test your solution here
+   
     events = [
         (1, 10), (1, 12), (1, 18),
         (3, 1), (3, 2), (3, 3)
