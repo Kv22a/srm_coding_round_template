@@ -51,7 +51,19 @@ def first_stable_character(s):
         >>> first_stable_character("a")
         None
     """
-    # TODO: Implement your solution here
+    n = len(s)
+    i = 0       
+    pass
+    while i < n:
+        char = s[i]
+        start = i
+        while i < n and s[i] == char:
+            i += 1
+        end = i
+        
+        if end - start >= 2:
+            if char not in s[end:]:
+                return char   # TODO: Implement your solution here
     pass
 
 
